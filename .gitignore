@@ -1,0 +1,8 @@
+# notebooks
+*.ipynb
+
+# weights
+*ckpt*
+*checkpoint*
+*.h5
+*.hdf5
