@@ -51,11 +51,11 @@ def test(path = './weights/m-rBCR/'):
     status = checkpoint.restore(checkpoint_to_restore)
     status.assert_consumed()
     
-    test_dir = '/bigdata/casus/MLID/RuiLi/Data/LM/deepNuclei/imn_bio_v2/test/'
+    test_dir = './data/test/'
     test_list = natsorted(os.listdir(test_dir))  
     
-    test_raw = np.load(test_dir + test_list[1])  # select testset [imn, bio, storm, w_c]
-    w_test_img, o_test_img = test_raw['w_img'], test_raw['o']
+    test_raw = np.load(test_dir + test_list[0])  # select testset [imn, bio, storm, w_c]
+    w_test_img, o_test_img = test_raw['w'], test_raw['gt']
     test_w_list, test_o_list = multi_input(w_test_img, o_test_img)
     
     pred_test_list = eval_model.predict(test_w_list)
@@ -73,3 +73,4 @@ def test(path = './weights/m-rBCR/'):
     psnr_value, ssim_value, rmse = metrics(pred_test_list[0], test_o_list[0])
     print('test performance:', psnr_value.round(2), ssim_value.round(2), rmse.round(2))
     
+test()

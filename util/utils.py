@@ -21,6 +21,33 @@ def subShow3(IMG1, IMG2, IMG3):
     plt.axis('off')
     plt.show()
 
+def save_svg(image_stack, domain, kind, path):
+    # Define the path where you want to save the SVG files
+    output_path = path
+    os.makedirs(output_path, exist_ok=True)
+
+    # Loop through the image stack and save each element as an SVG file
+    for i in range(image_stack.shape[0]):
+        image = image_stack[i, :, :, 0]
+
+        plt.figure(figsize=(1.28, 1.28), dpi=300)  # Set figsize and dpi to match the 128x128 size
+        plt.imshow(image, cmap='gray')
+        plt.axis('off')
+        svg_filename = os.path.join(output_path, f"{str(kind)}_{i:03d}_{str(domain)}.svg")
+        plt.savefig(svg_filename, format='svg', bbox_inches='tight', pad_inches=0)
+        plt.close()
+        
+def rescale(image_stack, MIN=0, MAX=1):
+    # Rescale the whole stack
+    if image_stack[0].max() != 1:
+        image_scale = []
+        for stack in range(image_stack.shape[0]):
+            temp = image_stack[stack, ...]
+            temp_scale = np.interp(temp, (temp.min(), temp.max()), (MIN, MAX))
+            image_scale.append(temp_scale.astype('float64'))
+    else:
+        image_scale = image_stack
+    return np.asarray(image_scale)
 
 class DataGeneratorMix:
     def __init__(self, data_dir, data_list, batch_size, noise):

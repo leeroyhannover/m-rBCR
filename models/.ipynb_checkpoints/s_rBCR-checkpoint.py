@@ -2,6 +2,8 @@ import keras
 from keras.layers import Input, Conv2D, Dense, Reshape, AveragePooling2D, Concatenate, LocallyConnected2D
 from keras.layers import *
 from keras.models import Model
+from util.loss_func import *
+from util.metrics import *
 
 def rdb_block(x, filters, k_size, strides, rdb_depth):
     """Residual Dense Block"""
@@ -90,6 +92,23 @@ def inverse_RDN(alpha1, alpha2, w1, w2, Ncnn1, Ncnn2, RDN=3, input_shape=(128, 1
     model = Model(inputs=x_inputs, outputs=y_outputs)
     return model
 
-# Example usage:
-# forward_model_RDN = BCR_RDN(input_shape=(128, 128, 1), alpha=32, p=0.2, nb=3, K=12, L=12, L0=12, RDN=5)
-# inverse_model_RDN = inverse_RDN(alpha1=32, alpha2=4, w1=5, w2=9, Ncnn1=6, Ncnn2=5, RDN=5)
+def model_s_rBCR(IMG_SHAPE=(128, 128, 1)):
+    
+    # Create the full model
+    input_shape = IMG_SHAPE
+    forward_model_RDN = BCR_RDN(input_shape=IMG_SHAPE, alpha=32, p=0.2, nb=3, K=12, L=12, L0=12, RDN=5) # 最后的参数标明residual的深度
+    inverse_model_RDN = inverse_RDN(alpha1=32, alpha2=4, w1=5, w2=9, Ncnn1=6, Ncnn2=5, RDN=5)
+    
+    inputs = Input(shape=input_shape)
+    x = inputs
+    y = forward_model_RDN(x)
+    z = inverse_model_RDN(y)
+
+    # combine the forward and backward
+    model = Model(inputs=inputs, outputs=z)
+    model.compile(optimizer='adam', loss='mse', metrics=[metrics_PSNR]) 
+
+    # print(model.input_shape, model.output_shape)
+    # print(model.summary())
+    
+    return model

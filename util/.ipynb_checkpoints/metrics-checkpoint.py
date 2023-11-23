@@ -32,14 +32,15 @@ def metrics_func_mimo(y_true_list, y_pred_list):
     
     return psnr
 
-def fsc_stacks(STACK1, STACK2):
+def metrics_PSNR(y_true, y_pred):
     
-    fsc_score = []
-    img = STACK1
-    gt = STACK2
+    squared_difference = tf.square(y_true - y_pred)
+    mse = tf.reduce_mean(squared_difference)
+
+    # Define the maximum possible pixel value (1.0 for images in the range [0, 1])
+    max_pixel_value = 1.0
+
+    # Calculate the PSNR
+    psnr = 10 * tf.math.log((max_pixel_value**2) / mse) / tf.math.log(10.0)
     
-    for i in range(img.shape[0]):
-        fsc_temp = get_fsc_2d(gt[i], img[i], 1)[1] 
-        fsc_score.append(fsc_temp)
-        
-    return np.asarray(fsc_score)
+    return psnr
