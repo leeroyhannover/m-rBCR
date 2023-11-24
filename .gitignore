@@ -2,7 +2,7 @@
 *.ipynb
 
 # weights
-*ckpt*
-*checkpoint*
-*.h5
-*.hdf5
+# *ckpt*
+# *checkpoint*
+# *.h5
+# *.hdf5
