@@ -1,9 +1,10 @@
-m-rBCR
+multi stage residual BCR-Net for microscopy deconvolution
 ==============================
 
-multi stage residual BCR-Net for microscopy deconvolution
+# mrBCR-Net for microscopy deconvolution
+## Solving the inverse problem of microscopy deconvolution with a residual Beylkin-Coifman-Rokhlin neural network
 
-Project Organization
+## Project Organization
 ------------
 
     ├── LICENSE
@@ -53,21 +54,32 @@ Project Organization
 
 
 --------
-this repo contains the code in the paper
+## Paper link
+this repo contains the code for the paper
 (https://arxiv.org/abs/2407.03239)
 
+## model pipeline
 the pipeline of the proejct works as below:
 ![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/pipe.png)
 
+## test results
+### biosr
 test results on biosr:
 ![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/biosr.png)
 
+### simulated imagenet 
 test results on simulated imagenet microscopy dataset
-![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/imn.png)
+<div align=center>
+<img src="https://github.com/leeroyhannover/m-rBCR/blob/main/figs/imn.png">
+</div>
 
+### real microscopy dataset dSTORM 
 test results on real dSTORM microscopy dataset
+![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/dSTORM.png)
 
+### real microscopy dataset confocal-widefield 
 test results on real widefield-confocal micrscopy dataset
+![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/widefield_confocal.png)
 
 all dataset is public avaibable online. please go to their original work to download the dataset.
 For the widefield-confocal dataset we generated, please refer to this:
