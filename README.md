@@ -1,8 +1,38 @@
 multi stage residual BCR-Net for microscopy deconvolution
 ==============================
 
-# mrBCR-Net for microscopy deconvolution
 ## Solving the inverse problem of microscopy deconvolution with a residual Beylkin-Coifman-Rokhlin neural network
+this repo contains the code for the paper
+(https://arxiv.org/abs/2407.03239)
+
+## Model structure
+the pipeline of the proejct works as below:
+![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/pipe.png)
+
+## Part of the test results
+### Simulated Biosr
+test results on biosr:
+![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/biosr.png)
+
+### Simulated imagenet 
+test results on simulated imagenet microscopy dataset
+<div align=center>
+<img src="https://github.com/leeroyhannover/m-rBCR/blob/main/figs/imn.png">
+</div>
+
+### Real microscopy dataset dSTORM 
+test results on real dSTORM microscopy dataset
+![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/dSTORM.png)
+
+### Real microscopy dataset confocal-widefield 
+test results on real widefield-confocal micrscopy dataset
+![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/widefield_confocal.png)
+
+## Data avalaibility
+all dataset is public avaibable online. please go to their original work to download the dataset.
+For the widefield-confocal dataset we generated, please refer to this:
+(https://rodare.hzdr.de/record/2668)
+
 
 ## Project Organization
 ------------
@@ -51,36 +81,3 @@ multi stage residual BCR-Net for microscopy deconvolution
     │       └── visualize.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
-
---------
-## Paper link
-this repo contains the code for the paper
-(https://arxiv.org/abs/2407.03239)
-
-## model pipeline
-the pipeline of the proejct works as below:
-![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/pipe.png)
-
-## test results
-### biosr
-test results on biosr:
-![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/biosr.png)
-
-### simulated imagenet 
-test results on simulated imagenet microscopy dataset
-<div align=center>
-<img src="https://github.com/leeroyhannover/m-rBCR/blob/main/figs/imn.png">
-</div>
-
-### real microscopy dataset dSTORM 
-test results on real dSTORM microscopy dataset
-![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/dSTORM.png)
-
-### real microscopy dataset confocal-widefield 
-test results on real widefield-confocal micrscopy dataset
-![img](https://github.com/leeroyhannover/m-rBCR/blob/main/figs/widefield_confocal.png)
-
-all dataset is public avaibable online. please go to their original work to download the dataset.
-For the widefield-confocal dataset we generated, please refer to this:
-(https://rodare.hzdr.de/record/2668)
